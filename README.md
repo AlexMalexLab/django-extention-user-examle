@@ -15,12 +15,15 @@ LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'account.ExtUser'
 
 в urls.py
+```python
 urlpatterns += [...
     path('account/', include('account.urls', namespace='account')),
 ...]
+```
 
 Имеется потдержка OAuth авторизации для входа/создания пользователя по E-Mail
 Для этого в файле settings.py вашего проекта надо прописать 
+```python
 ACCOUNT_OAUTH2 = {
     'google': {
         "client_id": "YOUR-DATA.apps.googleusercontent.com",
@@ -38,11 +41,13 @@ ACCOUNT_OAUTH2 = {
     }
 }
 ACCOUNT_OAUTH2_REDIRECT_HOST = 'https://YOUR-SITE.ru'
+```
 
 В шаблонах 
+```html
 <a href="{{ oauth_url.facebook.step1_get_authorize_url }}" class="social__soc social__soc_fb"></a>
 <a href="{{ oauth_url.google.step1_get_authorize_url }}" class="social__soc social__soc_gplus"></a>
-
+```
 
 Данный модель представлен для BackEnd.
 
