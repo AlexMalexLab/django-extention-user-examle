@@ -51,6 +51,14 @@ ACCOUNT_OAUTH2_REDIRECT_HOST = 'https://YOUR-SITE.ru'
 <a href="{{ oauth_url.google.step1_get_authorize_url }}" class="social__soc social__soc_gplus"></a>
 ```
 
+Для работы функции resize, которая автоматически уменьшает файл аватара до нужного размера, 
+еобходимо установить другое мое Django приложение image или не использовать фукцию ресайза. 
+```python
+from image.service import resize
+```
+Данное приложение для resize представленно в моих проектах.
+
+
 Данное Django приложение представлено для BackEnd.
 
 Как подключить FrontEnd?
