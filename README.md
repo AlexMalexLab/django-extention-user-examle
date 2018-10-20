@@ -52,9 +52,7 @@ ACCOUNT_OAUTH2_REDIRECT_HOST = 'https://YOUR-SITE.ru'
 
 Данное Django приложение представлено для BackEnd.
 
-
---
-Как подключить FrontEnd.
+Как подключить FrontEnd?
 Без интеграции с основным шаблоном, файлов статики по проекту, Vue.js, Webpack, Babel и доп. модулей ForntEnd часть в данном репозитарии представлена в качестве примера. 
 
 
