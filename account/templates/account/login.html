@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Авторизация{% endblock %}
+
+{% block middle %}
+    <div class="middle middle_full-v">
+        <div class="justform">
+            <div class="justform__frame">
+                <form>
+                    <div class="form form_login">
+                        <img v-if="preload" class="preloader" src="{% static 'images/preloader.gif' %}"/>
+                        <template v-else class="hide" :class="{ show: !preload }">
+                            <div class="title mb30">
+                                <h1>Авторизация</h1>
+                            </div>
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.login" name="login" type="email"
+                                       :class="{ 'has-error': hasError('login') }" placeholder="E-mail (логин)" />
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('login')">
+                                <div v-for="item in errors.login">[[ item ]]</div>
+                            </div>
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.password" name="password" type="password"
+                                       :class="{ 'has-error': hasError('password') }" placeholder="Пароль" />
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('password')">
+                                <div v-for="item in errors.password">[[ item ]]</div>
+                            </div>
+                            <div class="form__f result mb10 mt10" v-if="wait"><img src="{% static 'images/indicator.gif' %}"/> Пожалуйста подождите</div>
+                            <div class="form__f result mb10 mt10" :class="'result_'+resultType" v-if="result.length > 0">[[ result ]]</div>
+                            <div class="form__f mb10"><div @click="submit" class="button button_yellow">Войти</div></div>
+
+                            <div class="social mt20 mb20">
+                                <div class="social__label">Войти через социальные сети</div>
+                                <div class="social__caps">
+                                    <a href="{{ oauth_url.facebook.step1_get_authorize_url }}" class="social__soc social__soc_fb"></a>
+                                    <!-- <a class="social__soc social__soc_twitter"></a> -->
+                                    <a href="{{ oauth_url.google.step1_get_authorize_url }}" class="social__soc social__soc_gplus"></a>
+                                    <!-- <a href="#" class="social__soc social__soc_vk"></a> -->
+                                </div>
+                            </div>
+                            <div class="form__f form__f_linkc">
+                                <a href="{% url 'account:restore' %}">Восстановить доступ</a>
+                            </div>
+                        </template>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

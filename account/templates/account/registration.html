@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Авторизация{% endblock %}
+
+{% block middle %}
+    <div class="middle middle_full-v">
+        <div class="justform">
+            <div class="justform__frame">
+                <!-- <form> -->
+                    <div class="form form_reg">
+                        <img v-if="preload" class="preloader" src="{% static 'images/preloader.gif' %}"/>
+                        <template v-else class="hide" :class="{ show: !preload }">
+
+                            <div class="title mb30">
+                                <h1>Регистрация</h1>
+                            </div>
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.login" name="login" type="email"
+                                       :class="{ 'has-error': hasError('login') }" placeholder="E-mail (логин)"
+                                        ref="login" init="{{ request.GET.login }}"/>
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('login')">
+                                <div v-for="item in errors.login">[[ item ]]</div>
+                            </div>
+
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.name" type="text" name="name"
+                                       :class="{ 'has-error': hasError('name') }" placeholder="Имя" />
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('name')">
+                                <div v-for="item in errors.name">[[ item ]]</div>
+                            </div>
+
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.password" type="password" name="password"
+                                       :class="{ 'has-error': hasError('password') }" placeholder="Пароль" />
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('password')">
+                                <div v-for="item in errors.password">[[ item ]]</div>
+                            </div>
+
+
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.password_confirm" type="password" name="password_confirm"
+                                       :class="{ 'has-error': hasError('password_confirm') }" placeholder="Повторите пароль" />
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('password_confirm')">
+                                <div v-for="item in errors.password_confirm">[[ item ]]</div>
+                            </div>
+
+                            <div class="form__f mb10"><div class="button button_white button_load" @click="selectImg">Загрузить аватар</div></div>
+
+                            <div class="form__f mt20 mb20">
+                                <div class="checkbox checkbox_pad" :class="{ 'checkbox_check': values.notify != 0 }">
+                                    <div class="checkbox__box" @click="setVal('notify', !values.notify)"></div>
+                                    <span>
+                                        Я принимаю <a href="{% url 'page:detail' 'rules' %}" target="_blank">правила сайта</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('notify')">
+                                <div v-for="item in errors.notify">[[ item ]]</div>
+                            </div>
+
+                            <div class="form__f result mb10 mt10" v-if="wait"><img src="{% static 'images/indicator.gif' %}"/> Пожалуйста подождите</div>
+                            <div class="form__f result mb10 mt10" :class="'result_'+resultType" v-if="result.length > 0">[[ result ]]</div>
+                            <div class="form__f"><div @click="submit" class="button button_yellow button_prime">Зарегистрироваться</div></div>
+
+                            <div class="social mt20">
+                                <div class="social__label">Регистрация через социальные сети</div>
+                                <div class="social__caps">
+                                    <a href="{{ oauth_url.facebook.step1_get_authorize_url }}" class="social__soc social__soc_fb"></a>
+                                    <!-- <a class="social__soc social__soc_twitter"></a> -->
+                                    <a href="{{ oauth_url.google.step1_get_authorize_url }}" class="social__soc social__soc_gplus"></a>
+                                    <!-- <a href="#" class="social__soc social__soc_vk"></a> -->
+                                </div>
+                            </div>
+                            <input class="imgf" type="file" name="avatar" accept="image/*"/>
+                        </template>
+                    </div>
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

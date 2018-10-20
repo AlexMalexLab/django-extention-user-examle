@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Восстановить доступ{% endblock %}
+
+{% block middle %}
+    <div class="middle middle_full-v">
+        <div class="justform">
+            <div class="justform__frame">
+                <form>
+                    <div class="form form_restore-access">
+                        <img v-if="preload" class="preloader" src="{% static 'images/preloader.gif' %}"/>
+                        <template v-else class="hide" :class="{ show: !preload }">
+                            <div class="title mb30">
+                                <h1>Восстановить доступ</h1>
+                            </div>
+                            <div class="form__f mb10">E-mail <span>(Данные придут на указанный email)</span></div>
+                            <div class="form__f mb10">
+                                <input v-model.trim="values.login" name="login" type="email"
+                                       :class="{ 'has-error': hasError('login') }" placeholder="E-mail (логин)" />
+                            </div>
+                            <div class="form__f mb10 resf" v-if="hasError('login')">
+                                <div v-for="item in errors.login">[[ item ]]</div>
+                            </div>
+                            <div class="form__f result mb10 mt10" v-if="wait"><img src="{% static 'images/indicator.gif' %}"/> Пожалуйста подождите</div>
+                            <div class="form__f result mb10 mt10" :class="'result_'+resultType" v-if="result.length > 0">[[ result ]]</div>
+                            <div class="form__f mb10"><div @click="submit" class="button button_yellow">Восстановить</div></div>
+                        </template>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "columns.html" %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block sidebar %}
+    {% include "profile_menu.html" with menu_item="profile" %}
+{% endblock %}
+
+{% block content %}
+    <div class="title mb30">
+        <h1>Профиль</h1>
+    </div>
+    <div class="form-profile" data-id="{{ usr_id }}">
+        <img v-if="preload" class="preloader" src="{% static 'images/preloader.gif' %}"/>
+        <template v-else class="hide" :class="{ show: !preload }">
+            <div class="form mb30">
+                <div class="form__f mb20">E-mail <span>(логин)</span></div>
+                <div class="form__f mb20"><input v-model.trim="values.login" :class="{ 'has-error': hasError('login') }" type="email" name="login" placeholder="E-mail (логин)"  /></div>
+                <div class="form__f mb10 resf" v-if="hasError('login')">
+                    <div v-for="item in errors.login">[[ item ]]</div>
+                </div>
+
+                <div class="form__f mb20">Имя</div>
+                <div class="form__f mb20"><input v-model.trim="values.name" :class="{ 'has-error': hasError('name') }" type="text" name="name" placeholder="Имя"/></div>
+                <div class="form__f mb10 resf" v-if="hasError('name')">
+                    <div v-for="item in errors.name">[[ item ]]</div>
+                </div>
+
+                <div class="form__f mb20">Пароль <span>(Оставьте поля пустыми, если не хотите менять пароль)</span></div>
+
+                <div class="form__f mb10">
+                    <input v-model.trim="values.password" type="password" name="password"
+                           :class="{ 'has-error': hasError('password') }" placeholder="Пароль" />
+                </div>
+                <div class="form__f mb10 resf" v-if="hasError('password')">
+                    <div v-for="item in errors.password">[[ item ]]</div>
+                </div>
+                <div class="form__f mb10">
+                    <input v-model.trim="values.password_confirm" type="password" name="password_confirm"
+                           :class="{ 'has-error': hasError('password_confirm') }" placeholder="Повторите пароль" />
+                </div>
+                <div class="form__f mb10 resf" v-if="hasError('password_confirm')">
+                    <div v-for="item in errors.password_confirm">[[ item ]]</div>
+                </div>
+            </div>
+            <div class="title mb30">
+                <h1>Личные данные</h1>
+            </div>
+            <div class="form mb30">
+                <div class="form__f mb20">День рождения <span>(в формате ДД/MM/ГГГГ, например 25/09/1975)</span></div>
+                <div class="form__f mb20"><input v-model.trim="values.birthday" :class="{ 'has-error': hasError('birthday') }" type="text" name="birthday" placeholder="День рождения"  /></div>
+                <div class="form__f mb10 resf" v-if="hasError('birthday')">
+                    <div v-for="item in errors.birthday">[[ item ]]</div>
+                </div>
+
+                <div class="form__f mb20">Страна</div>
+                <div class="form__f mb20"><input v-model.trim="values.country" :class="{ 'has-error': hasError('country') }" type="text" name="country" placeholder="Страна"/></div>
+
+                <div class="form__f mb20">Город</div>
+                <div class="form__f mb20"><input v-model.trim="values.city" :class="{ 'has-error': hasError('city') }" type="text" name="city"  placeholder="Город" /></div>
+
+                <div class="form__f mb20">Интересы</div>
+                <div class="form__f mb20"><input v-model.trim="values.interests" :class="{ 'has-error': hasError('interests') }"  type="text" name="interests"  placeholder="Интересы" /></div>
+            </div>
+            <div class="form mb30">
+                <div class="form__f mb20">Яндекс.Кошелек</div>
+                <div class="form__f mb20"><input v-model.trim="values.ya_purse" :class="{ 'has-error': hasError('ya_purse') }"  type="text" name="ya_purse"  placeholder="Яндекс.Кошелек" /></div>
+            </div>
+            <div class="form mb30">
+                <img :src="files.avatar ? '{% get_media_prefix %}'+files.avatar : '{% static 'images/avatar_def.png' %}'" class="circle"/>
+                <div class="form__f mt10"><div class="button button_white button_load button_220" @click="selectImg">Выбрать аватар</div></div>
+                <div class="form__f mb20 resf resf_avatar"></div>
+            </div>
+            <div class="form__f mb10 resf" v-if="hasError('avatar')">
+                <div v-for="item in errors.avatar">[[ item ]]</div>
+            </div>
+
+            <div class="form__f result mb10 mt10" v-if="wait"><img src="{% static 'images/indicator.gif' %}"/> Пожалуйста подождите</div>
+            <div class="form__f result mb10 mt10" :class="'result_'+resultType" v-if="result.length > 0">[[ result ]]</div>
+            <div class="center">
+
+                <div class="button button_dark button_220 button_prime" @click="submit">Сохранить</div>
+            </div>
+            <input class="imgf" type="file" name="avatar" accept="image/*"/>
+        </template>
+    </div>
+{% endblock %}
