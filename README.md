@@ -12,6 +12,15 @@ It's part of planengo.ru
 
 Подключение в файле settings.py
 ```python
+
+INSTALLED_APPS = [
+...
+    'mail_templated',
+    'account.apps.AccountConfig',
+...
+]
+
+...
 LOGIN_URL = 'account:login'
 LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'account.ExtUser'
