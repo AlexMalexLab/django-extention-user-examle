@@ -9,10 +9,11 @@ It's part of planengo.ru
 Работа через API Django Rest Frameworks.
 
 Подключение в файле settings.py
-
+```python
 LOGIN_URL = 'account:login'
 LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'account.ExtUser'
+```
 
 в urls.py
 ```python
