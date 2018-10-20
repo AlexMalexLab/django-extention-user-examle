@@ -23,6 +23,7 @@ urlpatterns += [...
 
 Имеется потдержка OAuth авторизации для входа/создания пользователя по E-Mail
 Для этого в файле settings.py вашего проекта надо прописать 
+
 ```python
 ACCOUNT_OAUTH2 = {
     'google': {
@@ -49,14 +50,15 @@ ACCOUNT_OAUTH2_REDIRECT_HOST = 'https://YOUR-SITE.ru'
 <a href="{{ oauth_url.google.step1_get_authorize_url }}" class="social__soc social__soc_gplus"></a>
 ```
 
-Данный модель представлен для BackEnd.
+Данное Django приложение представлено для BackEnd.
 
 
---------
-Как подключить FrontEnd
-Без интеграции с основным шаблон файлов, другой статики по проекту, Vue.js, Webpack, Babel и доп. модулей ForntEnd часть в данном депозитарии представлена в качестве примеров. 
+--
+Как подключить FrontEnd.
+Без интеграции с основным шаблоном, файлов статики по проекту, Vue.js, Webpack, Babel и доп. модулей ForntEnd часть в данном репозитарии представлена в качестве примера. 
 
-Если вас интересует как это работает через ForntEnd то, можете посмотреть на сайте 
+
+Данный код реально работает на сайте 
 https://planengo.ru/account/login/
 https://planengo.ru/account/signup/
 
