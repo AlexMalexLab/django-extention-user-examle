@@ -75,7 +75,7 @@ from image.service import resize
 Для этого нужно сделать интеграцию с основным шаблоном, файлами статики по проекту, Vue.js, Webpack, Babel и доп. модулей ForntEnd. Все это выходит за рамки Django App методологии. Поэтому часть файлов в данном репозитарии представлена в качестве примера. 
 
 
-**Данный код реально работает на сайте**
+**Данный код реально работает на сайте https://planengo.ru/**
 1. https://planengo.ru/account/login/
 2. https://planengo.ru/account/signup/
 
